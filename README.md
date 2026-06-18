@@ -2,7 +2,12 @@
 
 Bu proje; veri güvenliği, ilişkisel veritabanı yönetimi ve iş mantığı (business logic) kurallarını barındıran modern bir **Backend API** sistemi ile son kullanıcının etkileşime girebildiği şık bir **Frontend (Ön Yüz)** web arayüzünün birleşiminden oluşan **Full-Stack** bir yazılım mühendisliği çalışmasıdır.
 
----
+--------------------------------------------------------------------------------------------------------
+# 🚀🚀🚀🚀LİNK İLE UYGULAMAYA GİRİŞ YAP 🚀🚀🚀🚀🚀🚀🚀
+
+https://bank-account-management-system-7yhbz2ddbkgy9ze8rdkfv8.streamlit.app/
+
+--------------------------------------------------------------------------------------------------------
 
 ## 🏗️ Sistem Mimarisi ve Çalışma Mantığı
 
