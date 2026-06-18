@@ -1,28 +1,48 @@
-# 🏦 RESTful Banka Hesap Yönetimi API'si
+# 🏦 Zirve Bank: Katmanlı Mimarili Full-Stack Banka Yönetim Sistemi
 
-Bu proje, Yazılım Mühendisliği standartlarına uygun olarak katmanlı mimari (Layered Architecture) prensipleriyle geliştirilmiş; veri bütünlüğü, ilişkisel veritabanı yönetimi ve güvenli iş mantığı (business logic) barındıran modern bir backend API sistemidir.
+Bu proje; veri güvenliği, ilişkisel veritabanı yönetimi ve iş mantığı (business logic) kurallarını barındıran modern bir **Backend API** sistemi ile son kullanıcının etkileşime girebildiği şık bir **Frontend (Ön Yüz)** web arayüzünün birleşiminden oluşan **Full-Stack** bir yazılım mühendisliği çalışmasıdır.
 
 ---
 
-## 🛠️ Kullanılan Teknolojiler ve Standartlar
+## 🏗️ Sistem Mimarisi ve Çalışma Mantığı
 
-* **Framework:** [FastAPI](https://fastapi.tiangolo.com/) (Yüksek performanslı, asenkron ve otomatik Swagger dökümantasyonlu API geliştirme)
-* **ORM (Veritabanı Köprüsü):** [SQLAlchemy](https://www.sqlalchemy.org/) (Python nesnelerini SQL tablolarına dönüştürmek için)
-* **Veritabanı:** SQLite (Hafif ve gömülü ilişkisel veritabanı sistemi)
-* **Veri Doğrulama:** Pydantic (Gelen HTTP isteklerinin veri tiplerini ve güvenliğini doğrulamak için)
+Proje, kurumsal şirketlerin kullandığı **Mikroservis / Ayrık Mimari** prensiplerine uygun olarak iki bağımsız katmanın birbiriyle HTTP protokolü üzerinden (REST API) konuşması esasına dayanır:
+
+1. **Arka Plan Katmanı (Backend - FastAPI):** İşin mutfağıdır. Veritabanı bağlantılarını, SQL tablolarını yönetir ve hesaplar arası havale/bakiye kontrolleri gibi kritik algoritmaları işletir. (`Port: 8000`)
+2. **Ön Yüz Katmanı (Frontend - Streamlit):** Müşterinin gördüğü vitrindir. Kullanıcıdan aldığı verileri güvenli bir şekilde arka plana iletir ve gelen yanıtları temiz, kurumsal bir tasarımla ekrana basar. (`Port: 8501`)
+
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+* **Core Language:** Python 3
+* **API Framework:** FastAPI (Asenkron, yüksek performanslı web servis mimarisi)
+* **Web UI Frontend:** Streamlit (Veri odaklı ve modern kullanıcı arayüzü)
+* **ORM (Veritabanı Köprüsü):** SQLAlchemy (Python nesnelerini güvenli SQL sorgularına dönüştürmek için)
+* **Veritabanı:** SQLite (İlişkisel, gömülü veritabanı sistemi)
+* **Veri Doğrulama:** Pydantic (HTTP isteklerindeki veri tiplerini ve güvenliğini doğrulamak için)
 
 ---
 
 ## 💡 Kazanılan Yazılım Mühendisliği Yetkinlikleri
 
-1. **Katmanlı Mimari Tasarımı:** Veritabanı modelleri (`models.py`), veritabanı konfigürasyonu (`database.py`) ve API yönlendirmeleri (`main.py`) birbirinden izole edilerek temiz kod (Clean Code) standartları uygulandı.
-2. **İş Mantığı ve Hata Yönetimi:** Para transferlerinde yetersiz bakiye kontrolleri, benzersiz hesap numarası doğrulamaları ve HTTP durum kodları (201 Created, 400 Bad Request, 404 Not Found) sektörel standartlarda yönetildi.
-3. **Otomatik API Dökümantasyonu:** FastAPI'nin entegre OpenAPI yapısı sayesinde interaktif test arayüzü kuruldu.
+* **Full-Stack Entegrasyonu:** İki farklı yerel sunucuyu (FastAPI ve Streamlit) `requests` kütüphanesi kullanarak birbirine entegre etme ve veri senkronizasyonu sağlama yetkinliği.
+* **Temiz Kod ve Katmanlı Tasarım (Clean Code):** Veritabanı ayarlarının (`database.py`), SQL modellerinin (`models.py`), API rotalarının (`main.py`) ve arayüz kodlarının (`app.py`) birbirinden tamamen izole edilerek sürdürülebilir mimari kurulması.
+* **Kritik İş Mantığı (Business Logic) & Hata Yönetimi:** Para transferlerinde yetersiz bakiye engellemesi, benzersiz hesap numarası kontrolleri ve bunlara uygun HTTP durum kodlarının (201 Created, 400 Bad Request, 404 Not Found) sektörel standartlarda yönetilmesi.
 
 ---
 
-## 🚀 Projeyi Yerel Bilgisayarınızda Çalıştırın
+## 🚀 Projeyi Bilgisayarınızda Çalıştırın
 
-### 1. Bağımlılıkları Yükleyin
+Bu projeyi yerelde çalıştırmak için iki ayrı katmanı (sunucuyu) aynı anda ayağa kaldırmamız gerekir.
+
+### Adım 1: Bağımlılıkları Yükleyin
+Öncelikle projenin kök dizininde bir terminal açarak gerekli kütüphaneleri yükleyin:
 ```bash
 pip install -r requirements.txt
+
+
+### Adım 2: Müşteri Panelini (Frontend) Başlatın
+VS Code üzerinden **yeni bir terminal sekmesi (+)** açın (ilk terminali kapatmayın) ve şu komutu yazarak web sitesini ayağa kaldırın:
+```bash
+python -m streamlit run app.py
